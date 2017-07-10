@@ -13,7 +13,9 @@ class ParameterBuilder extends AbstractBuilder {
 	public function build(AbstractModel $model) {
 		$type = $this->getType($model, $this->config->getGenerateScalarTypeHints());
 		if ($type !== null) {
-			$this->writer->write($type . ' ');
+            if ($this->config->getGenerateParameterTypeHints()) {
+                $this->writer->write($type . ' ');
+            }
 		}
 	
 		if ($model->isPassedByReference()) {

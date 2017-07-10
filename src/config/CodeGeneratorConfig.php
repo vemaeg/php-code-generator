@@ -34,6 +34,7 @@ class CodeGeneratorConfig {
 				return $options['generateDocblock'];
 			},
 			'generateScalarTypeHints' => false,
+            'generateParameterTypeHints' => false,
 			'generateReturnTypeHints' => false,
 			'enableSorting' => true,
 			'useStatementSorting' => CodeGenerator::SORT_USESTATEMENTS_DEFAULT,
@@ -45,6 +46,7 @@ class CodeGeneratorConfig {
 		$resolver->setAllowedTypes('generateDocblock', 'bool');
 		$resolver->setAllowedTypes('generateEmptyDocblock', 'bool');
 		$resolver->setAllowedTypes('generateScalarTypeHints', 'bool');
+        $resolver->setAllowedTypes('generateParameterTypeHints', 'bool');
 		$resolver->setAllowedTypes('generateReturnTypeHints', 'bool');
 		$resolver->setAllowedTypes('enableSorting', 'bool');
 		$resolver->setAllowedTypes('useStatementSorting', ['bool', 'string', '\Closure', 'phootwork\lang\Comparator']);
@@ -107,6 +109,15 @@ class CodeGeneratorConfig {
 	public function getGenerateScalarTypeHints() {
 		return $this->options['generateScalarTypeHints'];
 	}
+
+    /**
+     * Returns whether parameter type hints will be generated for method parameters
+     *
+     * @return bool `true` if they will be generated and `false` if not
+     */
+    public function getGenerateParameterTypeHints() {
+        return $this->options['generateParameterTypeHints'];
+    }
 	
 	/**
 	 * Returns whether sorting is enabled
@@ -163,6 +174,17 @@ class CodeGeneratorConfig {
 		$this->options['generateScalarTypeHints'] = $generate;
 		return $this;
 	}
+
+    /**
+     * Sets whether parameter type hints will be generated for method parameters
+     *
+     * @param bool $generate `true` if they will be generated and `false` if not
+     * @return $this
+     */
+    public function setGenerateParameterTypeHints($generate) {
+        $this->options['generateParameterTypeHints'] = $generate;
+        return $this;
+    }
 
 	/**
 	 * Returns whether return type hints will be generated for method parameters (PHP 7)
